@@ -16,14 +16,12 @@ const deriveSeed = derivePath(path, hexSeed).key;
 const secret = nacl.sign.keyPair.fromSeed(deriveSeed).secretKey;
 
 const publicKey = Keypair.fromSecretKey(secret).publicKey;
-console.log(publicKey);
-console.log(publicKey.toBase58());
-
 
 const message = new TextEncoder().encode("hello world");
 
 const signature = nacl.sign.detached(message, secret);
 
+// all value are in Uint8
 const result = nacl.sign.detached.verify(
     message,
     signature,
